@@ -26,16 +26,11 @@ namespace ConsoleAppProgram6
         }
         static void Main(string[] args)
         {
-            Console.Write("Введiть кiлькiсть рядкiв :");
-            int nrows = Convert.ToInt32(Console.ReadLine());
-            Console.Write("Введiть кiлькiсть стовпчикiв :");
-            int ncolumns = Convert.ToInt32(Console.ReadLine());
-            int[,] array = new int[nrows, ncolumns];
-            bool nozero = true;
-            int c = 0;
-            int product = 1;
+            Console.Write("Введiть кiлькiсть рядкiв та стовпчикiв :");
+            int n = Convert.ToInt32(Console.ReadLine());
+            int[,] array = new int[n, n];
             array = ArrayRandom(array);
-            Console.WriteLine("Ваш масив :");
+            Console.WriteLine("Початковий масив :");
             for(int i = 0; i < array.GetLength(0); i++)
             {
                 for(int j = 0; j < array.GetLength(1); j++)
@@ -44,27 +39,20 @@ namespace ConsoleAppProgram6
                 }
                 Console.WriteLine();
             }
-            for(int i = 0; i < array.GetLength(1); i++)
+            for(int i = 0; i < array.GetLength(0); i++)
             {
-                for(int j = 0; j < array.GetLength(0); j++)
+                int t = array[i,i];
+                array[i, i] = array[i, array.GetLength(0) - 1 - i];
+                array[i, array.GetLength(0) - 1 - i] = t;
+            }
+            Console.WriteLine("Перетворений масив :");
+            for (int i = 0; i < array.GetLength(0); i++)
+            {
+                for (int j = 0; j < array.GetLength(1); j++)
                 {
-                    if (array[j, i] == 0)
-                    {
-                        nozero = false;
-                        break;
-                    }
+                    Console.Write(" {0,3}", array[i, j]);
                 }
-                if (nozero)
-                {
-                    for(int j = 0; j < array.GetLength(0); j++)
-                    {
-                        product *= array[j, i];
-                    }
-                    Console.WriteLine("Добуток елементiв у {0} стовпчику масиву :{1}",c + 1,product);
-                    product = 1;
-                }
-                nozero = true;
-                c += 1;
+                Console.WriteLine();
             }
             Console.ReadKey();
         }
