@@ -8,6 +8,40 @@ namespace ConsoleAppProgram6
 {
     class Program
     {
+        static void ArrayWrite(int[][] array)
+        {
+            for (int i = 0; i < array.Length; i++)
+            {
+                for (int j = 0; j < array[0].Length; j++)
+                {
+                    Console.Write(" {0,3}", array[i][j]);
+                }
+                Console.WriteLine();
+            }
+        }
+        static void ArrayEdit(int[][] array)
+        {
+            int maxelement = array[0][0];
+            int imaxelement = 0;
+            for (int i = 0; i < array.Length; i++)
+            {
+                for (int j = 0; j < array[i].Length; j++)
+                {
+                    if (array[i][j] > maxelement)
+                    {
+                        maxelement = array[i][j];
+                        imaxelement = i;
+                    }
+                }
+            }
+            for (int i = imaxelement; i < array.Length - 1; i++)
+            {
+                int[] t = array[i];
+                array[i] = array[i + 1];
+                array[i + 1] = t;
+            }
+            Array.Resize(ref array, array.Length - 1);
+        }
         static int[][] ArrayRandom(int[][] array)
         {
             Console.Write("Дiапазон рандому вiд :");
@@ -31,51 +65,16 @@ namespace ConsoleAppProgram6
             Console.Write("Введiть кiлькiсть стовпчикiв :");
             int ncolumns = Convert.ToInt32(Console.ReadLine());
             int[][] array = new int[nrows][];
-            int maxelement;
-            int imaxelement;
-            for(int i = 0; i < nrows; i++)
+            for (int i = 0; i < nrows; i++)
             {
                 array[i] = new int[ncolumns];
             }
             array = ArrayRandom(array);
             Console.WriteLine("Початковий масив :");
-            for(int i = 0; i < array.Length; i++)
-            {
-                for(int j = 0; j < array[0].Length; j++)
-                {
-                    Console.Write(" {0,3}", array[i][j]);
-                }
-                Console.WriteLine();
-            }
-            maxelement = array[0][0];
-            imaxelement = 0;
-            for(int i = 0; i < array.Length; i++)
-            {
-                for (int j = 0; j < array[i].Length; j++)
-                {
-                    if (array[i][j] > maxelement)
-                    {
-                        maxelement = array[i][j];
-                        imaxelement = i;
-                    }
-                }
-            }
-            for (int i = imaxelement; i < array.Length - 1; i++) 
-            {
-                int[] t = array[i];
-                array[i] = array[i + 1];
-                array[i + 1] = t;
-            }
-            Array.Resize(ref array, array.Length - 1);
+            ArrayWrite(array);
+            ArrayEdit(array);
             Console.WriteLine("Перетворений масив :");
-            for (int i = 0; i < array.Length; i++)
-            {
-                for (int j = 0; j < array[0].Length; j++)
-                {
-                    Console.Write(" {0,3}", array[i][j]);
-                }
-                Console.WriteLine();
-            }
+            ArrayWrite(array);
             Console.ReadKey();
         }
     }
