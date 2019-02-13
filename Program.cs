@@ -8,6 +8,26 @@ namespace ConsoleAppProgram6
 {
     class Program
     {
+        static void ArrayWrite(int[,] array)
+        {
+            for (int i = 0; i < array.GetLength(0); i++)
+            {
+                for (int j = 0; j < array.GetLength(1); j++)
+                {
+                    Console.Write(" {0,3}", array[i, j]);
+                }
+                Console.WriteLine();
+            }
+        }
+        static void ArrayEdit(int[,] array)
+        {
+            for (int i = 0; i < array.GetLength(0); i++)
+            {
+                int t = array[i, i];
+                array[i, i] = array[i, array.GetLength(0) - 1 - i];
+                array[i, array.GetLength(0) - 1 - i] = t;
+            }
+        }
         static int[,] ArrayRandom(int[,] array)
         {
             Console.Write("Дiапазон рандому вiд :");
@@ -31,29 +51,10 @@ namespace ConsoleAppProgram6
             int[,] array = new int[n, n];
             array = ArrayRandom(array);
             Console.WriteLine("Початковий масив :");
-            for(int i = 0; i < array.GetLength(0); i++)
-            {
-                for(int j = 0; j < array.GetLength(1); j++)
-                {
-                    Console.Write(" {0,3}", array[i, j]);
-                }
-                Console.WriteLine();
-            }
-            for(int i = 0; i < array.GetLength(0); i++)
-            {
-                int t = array[i,i];
-                array[i, i] = array[i, array.GetLength(0) - 1 - i];
-                array[i, array.GetLength(0) - 1 - i] = t;
-            }
+            ArrayWrite(array);
+            ArrayEdit(array);
             Console.WriteLine("Перетворений масив :");
-            for (int i = 0; i < array.GetLength(0); i++)
-            {
-                for (int j = 0; j < array.GetLength(1); j++)
-                {
-                    Console.Write(" {0,3}", array[i, j]);
-                }
-                Console.WriteLine();
-            }
+            ArrayWrite(array);
             Console.ReadKey();
         }
     }
