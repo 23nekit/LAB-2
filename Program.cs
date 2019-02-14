@@ -19,7 +19,7 @@ namespace ConsoleAppProgram6
                 Console.WriteLine();
             }
         }
-        static void ArrayEdit(int[][] array)
+        static int[][] ArrayEdit(int[][] array)
         {
             int maxelement = array[0][0];
             int imaxelement = 0;
@@ -41,6 +41,7 @@ namespace ConsoleAppProgram6
                 array[i + 1] = t;
             }
             Array.Resize(ref array, array.Length - 1);
+            return array;
         }
         static int[][] ArrayRandom(int[][] array)
         {
@@ -72,7 +73,7 @@ namespace ConsoleAppProgram6
             array = ArrayRandom(array);
             Console.WriteLine("Початковий масив :");
             ArrayWrite(array);
-            ArrayEdit(array);
+            array = ArrayEdit(array);
             Console.WriteLine("Перетворений масив :");
             ArrayWrite(array);
             Console.ReadKey();
