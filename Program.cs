@@ -11,7 +11,7 @@ namespace ConsoleApplication1
         {
             Console.WriteLine("Ваш масив :" + string.Join(" ", array));
         }
-        static void ArrayEdit(int[] array)
+        static int[] ArrayEdit(int[] array)
         {
             Console.Write("Введіть ключ :");
             int key = Convert.ToInt32(Console.ReadLine());
@@ -32,6 +32,7 @@ namespace ConsoleApplication1
                 }
                 Array.Resize(ref array, array.Length - 1);
             }
+            return array;
         }
         static int[] ArrayRandom(int n)
         {
@@ -53,7 +54,7 @@ namespace ConsoleApplication1
             int n = Convert.ToInt32(Console.ReadLine());
             int[] array = ArrayRandom(n);
             ArrayWrite(array);
-            ArrayEdit(array);
+            array = ArrayEdit(array);
             ArrayWrite(array);
             Console.ReadKey();
         }
